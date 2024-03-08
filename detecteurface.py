@@ -6,11 +6,19 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 
 cap = cv2.VideoCapture(0)
 
-start_time = time.time()
-photo_counter = 0
-
+if not os.path.exists('videos'):
+    os.makedirs('videos')
 if not os.path.exists('photos'):
     os.makedirs('photos')
+
+# Compter le nombre de fichiers vidéo existants dans le répertoire 'videos'
+video_files = [f for f in os.listdir('videos') if f.endswith('.mp4')]
+video_counter = len(video_files) + 1
+
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+out = cv2.VideoWriter(f'videos/video{video_counter}.mp4', fourcc, 20.0, (640, 480))
+start_time = time.time()
+photo_counter = 0
 
 while True:
     ret, frame = cap.read()
@@ -31,16 +39,18 @@ while True:
 
     cv2.imshow('Face Detection', frame)
     
-
-    if time.time() - start_time >= 30:
-        cv2.imwrite('photos/photo_{photo_counter}.jpg', frame)
+    out.write(frame)
+    
+    if time.time() - start_time >= 20:
+        photo_path = f'photos/photo_{photo_counter}.jpg'
+        cv2.imwrite(photo_path, frame)
+        print(f"Photo sauvegardez {photo_path}") # Ajout d'un message pour confirmer la sauvegarde
         photo_counter += 1
-        start_time = time.time() 
+        start_time = time.time()
 
-    # Quitter la boucle si la touche 'q' est pressée
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Libérer la capture vidéo et fermer les fenêtres
 cap.release()
+out.release()
 cv2.destroyAllWindows()
