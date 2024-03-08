@@ -30,9 +30,6 @@ Ce projet utilise OpenCV pour détecter les visages dans une vidéo en temps ré
 
 - **Changement du format de la vidéo** : Modifiez le codec dans `fourcc = cv2.VideoWriter_fourcc(*'mp4v')` pour changer le format de la vidéo enregistrée.
 
-## 📝 Licence
-
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus d'informations.
 
 ## 🙏 Remerciements
 
