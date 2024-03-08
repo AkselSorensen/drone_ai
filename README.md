@@ -30,6 +30,9 @@ Ce projet utilise OpenCV pour détecter les visages dans une vidéo en temps ré
 
 - **Changement du format de la vidéo** : Modifiez le codec dans `fourcc = cv2.VideoWriter_fourcc(*'mp4v')` pour changer le format de la vidéo enregistrée.
 
+## 📝 Changement / amélioration 
+
+1. **Reconnaissance Faciale** : Utilise le classificateur de visage Haar cascade pour détecter les visages dans la vidéo en temps réel et les  comparer
 
 ## 🙏 Remerciements
 
