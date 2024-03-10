@@ -1,6 +1,6 @@
 # 🤖 Emotion Analysis AI 🌠
 
-Ce projet est une IA (Intelligence Artificielle) conçue pour analyser les émotions à partir d'images de visages. Utilisant des techniques de deep learning, cette IA est capable de reconnaître une variété d'émotions humaines.
+Ce projet est une IA (Intelligence Artificielle) conçue pour analyser les émotions à partir d'images de visages. Utilisant des techniques de deep learning, cette IA est capable de reconnaître une variété d'émotions humaines. ( Model à entrainer)
 
 ## 🚀 Commencer
 
