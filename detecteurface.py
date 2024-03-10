@@ -2,6 +2,7 @@ import cv2
 import time
 import os
 from datetime import datetime
+from plyer import notification
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
@@ -21,6 +22,7 @@ out = cv2.VideoWriter(f'videos/video_{current_time}.mp4', fourcc, 20.0, (640, 48
 
 start_time = time.time()
 photo_counter = 0
+face_detected = False
 
 while True:
     ret, frame = cap.read()
@@ -31,6 +33,23 @@ while True:
     
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     
+    if len(faces) > 0:
+        face_detected = True
+        # Envoyer une notification
+        notification.notify(
+            title='Visage détecté',
+            message='Un visage a été détecté par la caméra.',
+            app_icon=None, # Chemin vers l'icône de l'application
+            timeout=10, # Durée de la notification en secondes
+        )
+    else:
+        if face_detected:
+            face_detected = False
+            # Arrêter l'enregistrement de la vidéo
+            out.release()
+            # Redémarrer l'enregistrement avec un nouveau fichier
+            current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
+            out = cv2.VideoWriter(f'videos/video_{current_time}.mp4', fourcc, 20.0, (640, 480))
     
     cv2.imshow('🎥 Face Detection 🎥', frame)
     
